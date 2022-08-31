@@ -19,33 +19,17 @@
 # CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-NDK_VERSION="`cat VERSION`"
+echo "Installing..."
 
-BUILD_HOST="`uname | sed 's/./\L&/g'`-`uname -p`"
+cd dist
+git rm -f *.aar
+rm -f *.aar
+cd ..
 
-ANDROID_TOOLCHAIN_ROOT=${ANDROID_HOME}/ndk/${NDK_VERSION}/toolchains/llvm/prebuilt/${BUILD_HOST}
-ANDROID_SYSROOT=${ANDROID_TOOLCHAIN_ROOT}/sysroot
+cp ./bin/* ./dist/
 
-ANDROID_LIB=$ANDROID_SYSROOT/usr/lib/
-
-echo $ANDROID_LIB
-
-AAR_LIB=`pwd`/libcxx/src/main/jniLibs/
-
-mkdir -p $AAR_LIB/arm64-v8a
-mkdir -p $AAR_LIB/armeabi-v7a
-mkdir -p $AAR_LIB/x86
-mkdir -p $AAR_LIB/x86_64
-
-cp $ANDROID_LIB/aarch64-linux-android/libc++_shared.so $AAR_LIB/arm64-v8a/libc++_shared.so
-cp $ANDROID_LIB/arm-linux-androideabi/libc++_shared.so $AAR_LIB/armeabi-v7a/libc++_shared.so
-cp $ANDROID_LIB/i686-linux-android/libc++_shared.so $AAR_LIB/x86/libc++_shared.so
-cp $ANDROID_LIB/x86_64-linux-android/libc++_shared.so $AAR_LIB/x86_64/libc++_shared.so
-
-gradle wrapper
-./gradlew build
-
-mkdir -p bin
-rm -rf bin/*
-
-cp libcxx/build/outputs/aar/libcxx-release.aar bin/libcxx-${NDK_VERSION}.aar
+cd dist
+git add *
+git commit -m "Update libcxx binaries"
+git push
+cd ..

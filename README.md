@@ -8,3 +8,13 @@ This library does not contain the original shared files. Installing NDK is requi
 # License
 
 See [LICENSE](./LICENSE)
+
+# TotalPave Committers
+
+This repository contains submodules. Clone this repo with the `--recurse-submodules` flag.
+
+e.g: `git clone --recurse-submodules git@github.com:totalpaveinc/android-libcxx.git`
+
+If you have already cloned without submodules, you can correct the repo by running `git submodule update --init`
+
+Without the `bin/` (`android-libcxx-bin`) submodule, the `install.sh` script will not work properly.
