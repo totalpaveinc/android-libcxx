@@ -1,0 +1,8 @@
+.gradle
+gradlew
+gradlew.bat
+libcxx/gradle
+libcxx/build
+*.so
+bin/
+gradle/
