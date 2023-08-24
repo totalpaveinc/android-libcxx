@@ -35,3 +35,5 @@ git add *
 git commit -m "Update libcxx binaries `cat ../VERSION`"
 git push
 cd ..
+
+./gradlew publishReleasePublicationToMavenRepository
