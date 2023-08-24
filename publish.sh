@@ -19,17 +19,19 @@
 # CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 # OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-echo "Installing..."
+echo "Publishing..."
 
 cd dist
 git rm -f *.aar
 rm -f *.aar
 cd ..
 
+./build.sh
+
 cp ./bin/* ./dist/
 
 cd dist
 git add *
-git commit -m "Update libcxx binaries"
+git commit -m "Update libcxx binaries `cat ../VERSION`"
 git push
 cd ..

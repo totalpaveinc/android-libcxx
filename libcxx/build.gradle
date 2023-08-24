@@ -1,25 +1,58 @@
 
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "7.5.1"
+    gradleVersion = "7.6.1"
 }
 
 android {
+    namespace 'com.totalpave.libcxx'
+
     compileSdk 32
+    buildToolsVersion = '33.0.2'
 
     defaultConfig {
+        aarMetadata {
+            minCompileSdk 24
+        }
+
         minSdk 24
-        targetSdk 32
-        versionCode 1
-        versionName rootProject.file("VERSION").text.trim()
     }
 
     buildTypes {
         release {
             minifyEnabled false
+        }
+    }
+
+    publishing {
+        singleVariant('release') {}
+    }
+}
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'totalpave'
+            artifactId = 'libcxx'
+            version = file('../VERSION').text.trim()
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url = 'https://archiva.totalpave.com/repository/public'
+            credentials {
+                username findProperty('totalpave.repository.user')
+                password findProperty('totalpave.repository.password')
+            }
         }
     }
 }

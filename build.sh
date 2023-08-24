@@ -21,14 +21,16 @@
 
 NDK_VERSION="`cat VERSION`"
 
-BUILD_HOST="`uname | sed 's/./\L&/g'`-`uname -p`"
+if [ `uname` == "Darwin" ]; then
+    BUILD_HOST="darwin-x86_64"
+else
+    BUILD_HOST="linux-x86_64"
+fi
 
 ANDROID_TOOLCHAIN_ROOT=${ANDROID_HOME}/ndk/${NDK_VERSION}/toolchains/llvm/prebuilt/${BUILD_HOST}
 ANDROID_SYSROOT=${ANDROID_TOOLCHAIN_ROOT}/sysroot
 
 ANDROID_LIB=$ANDROID_SYSROOT/usr/lib/
-
-echo $ANDROID_LIB
 
 AAR_LIB=`pwd`/libcxx/src/main/jniLibs/
 
@@ -43,7 +45,7 @@ cp $ANDROID_LIB/i686-linux-android/libc++_shared.so $AAR_LIB/x86/libc++_shared.s
 cp $ANDROID_LIB/x86_64-linux-android/libc++_shared.so $AAR_LIB/x86_64/libc++_shared.so
 
 gradle wrapper
-./gradlew build
+./gradlew assembleRelease
 
 mkdir -p bin
 rm -rf bin/*
