@@ -6,3 +6,4 @@ libcxx/build
 *.so
 bin/
 gradle/
+local.properties
