@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = 'libcxxshared'
-include('libcxx')
+rootProject.name = "libcxxshared"
+include(":libcxx")

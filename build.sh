@@ -44,7 +44,6 @@ cp $ANDROID_LIB/arm-linux-androideabi/libc++_shared.so $AAR_LIB/armeabi-v7a/libc
 cp $ANDROID_LIB/i686-linux-android/libc++_shared.so $AAR_LIB/x86/libc++_shared.so
 cp $ANDROID_LIB/x86_64-linux-android/libc++_shared.so $AAR_LIB/x86_64/libc++_shared.so
 
-gradle wrapper
 ./gradlew assembleRelease
 
 mkdir -p bin
