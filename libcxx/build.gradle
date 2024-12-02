@@ -4,10 +4,6 @@ plugins {
     id 'maven-publish'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = "8.9"
-}
-
 android {
     namespace 'com.totalpave.libcxx'
 
