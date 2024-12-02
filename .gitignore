@@ -1,6 +1,7 @@
 .gradle
-libcxx/gradle
 libcxx/build
 *.so
 bin/
 local.properties
+.idea/caches
+/build
